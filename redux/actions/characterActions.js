@@ -2,6 +2,7 @@ import axios from "axios";
 import md5 from "js-md5";
 import {
   ALL_CHARACTERS_SUCCESS,
+  INITIAL_CHARACTERS_SUCCESS,
   CHARACTER_DETAILS_SUCCESS,
   ALL_CHARACTERS_SEARCH_REQUEST,
   COMICS_SUCCESS,
@@ -45,6 +46,22 @@ const linkConstruction = (callType, count, name, id) => {
   }
 };
 // Get all characters
+
+export const getInitialChar = (count) => async (dispatch) => {
+  try {
+    const link = linkConstruction("getAllChar", count, null, null);
+    const { data } = await axios.get(link);
+
+    dispatch({
+      type: INITIAL_CHARACTERS_SUCCESS,
+      payload: data,
+      functionType: "refresh",
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const getCharacters = (count) => async (dispatch) => {
   try {
     const link = linkConstruction("getAllChar", count, null, null);

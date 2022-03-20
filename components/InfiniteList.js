@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useInfiniteScroll } from "react-infinite-scroll-hook";
 import { useDispatch } from "react-redux";
 import { getCharacters } from "../redux/actions/characterActions";
+import { getRefreshData } from "../redux/actions/characterActions";
 import styles from "../styles/Home.module.css";
 import Masonry from "react-masonry-css";
 import CharacterItem from "./Characters/CharacterItem";
@@ -25,7 +26,7 @@ const InfiniteList = (props) => {
       dispatch(getCharacters(props.count));
     } else if (props.functionType === "refresh") {
       setLoading(true);
-      dispatch(getCharacters(0));
+      dispatch(getInitialChar(0));
     }
   };
 

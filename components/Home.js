@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import InfiniteList from "./InfiniteList";
 import styled from "styled-components";
@@ -14,9 +15,11 @@ const Home = () => {
     (state) => state.allCharacters
   );
 
+  const { initialCharacters } = useSelector((state) => state.initialCharacters);
+
   return (
     <>
-      <Search count={count} />
+      <Search count={count} initialCharacters={initialCharacters} />
       {functionType !== "initila" ? (
         <ListContainer>
           <InfiniteList

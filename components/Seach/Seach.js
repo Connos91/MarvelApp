@@ -8,15 +8,15 @@ import Link from "next/link";
 
 const Search = (props) => {
   const dispatch = useDispatch();
+  const classes = `form-control ${styles.search}`;
 
   const searchHero = (e) => {
     if (e.target.value === "") {
       dispatch({
         type: "CLEAR_CHARACTERS",
-        characters: [],
+        characters: props.initialCharacters,
+        functionType: "refresh",
       });
-
-      dispatch(getCharacters(0));
     } else {
       dispatch(searchCharacter(e.target.value));
     }
@@ -28,14 +28,17 @@ const Search = (props) => {
       <Link href="/" exact passHref>
         <Image src={Logo} alt="Marvel picture" className={styles.logoImg} />
       </Link>
-      <input
-        type="text"
-        id="search"
-        name="serch"
-        className={styles.searchInput}
-        placeholder="Search Hero"
-        onChange={(e) => searchHero(e)}
-      />
+
+      <div className="col-auto">
+        <input
+          type="text"
+          id="search"
+          className={classes}
+          name="serch"
+          placeholder="Search Hero"
+          onChange={(e) => searchHero(e)}
+        />
+      </div>
     </div>
   );
 };

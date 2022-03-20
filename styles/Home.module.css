@@ -43,17 +43,6 @@
   transform: skew(-15deg);
 }
 
-.searchInput {
-  display: inline-block;
-  padding: 10px;
-  height: 10px;
-  width: 300px;
-}
-
-.searchInput::placeholder {
-  color: #000;
-}
-
 .searchHeroContainer {
   background-color: #202020;
   padding: 8px;
@@ -120,8 +109,38 @@
   font-size: 40px;
   color: white;
 }
+
+.search {
+  width: 320px;
+}
+
 @media screen and (max-width: 500px) {
   .conTitle {
     text-align: center;
+  }
+}
+
+@media only screen and (min-width: 200px) and (max-width: 355px) {
+  .search {
+    padding: 5px;
+    width: 200px;
+  }
+}
+
+@media only screen and (min-width: 355px) and (max-width: 410px) {
+  .search {
+    width: 250px;
+  }
+}
+
+@media only screen and (min-width: 410px) and (max-width: 450px) {
+  .search {
+    width: 280px;
+  }
+}
+
+@media only screen and (min-width: 451px) and (max-width: 470px) {
+  .search {
+    width: 290px;
   }
 }

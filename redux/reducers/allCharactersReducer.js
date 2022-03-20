@@ -1,17 +1,24 @@
 import {
   ALL_CHARACTERS_SUCCESS,
+  INITIAL_CHARACTERS_SUCCESS,
   CHARACTER_DETAILS_SUCCESS,
   ALL_CHARACTERS_SEARCH_REQUEST,
   COMICS_SUCCESS,
   EVENTS_SUCCESS,
   STORIES_SUCCESS,
   SERIES_SUCCESS,
+  CLEAR_CHARACTERS,
 } from "../constants/characterConstants";
 import _ from "lodash";
 
 // Allcharacters reducer
 export const allCharactersReducer = (
-  state = { characters: [], count: 0 },
+  state = {
+    characters: [],
+    initialCharacters: [],
+    count: 0,
+    functionType: false,
+  },
   action
 ) => {
   switch (action.type) {
@@ -35,6 +42,31 @@ export const allCharactersReducer = (
         functionType: action.functionType,
       };
 
+    case CLEAR_CHARACTERS:
+      return {
+        ...state,
+        characters: action.characters,
+        functionType: action.functionType,
+      };
+    default:
+      return state;
+  }
+};
+
+export const allInitialCharactersReducer = (
+  state = {
+    initialCharacters: [],
+  },
+  action
+) => {
+  switch (action.type) {
+    case INITIAL_CHARACTERS_SUCCESS:
+      return {
+        ...state,
+        initialCharacters: action.payload.data.results,
+        count: 0,
+        functionType: action.functionType,
+      };
     default:
       return state;
   }
