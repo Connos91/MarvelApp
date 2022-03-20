@@ -1,10 +1,14 @@
 .container {
-  padding: 0 2rem;
+  min-height: 100vh;
+  padding: 0 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .main {
-  min-height: 100vh;
-  padding: 4rem 0;
+  padding: 5rem 0;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -12,20 +16,71 @@
   align-items: center;
 }
 
-.footer {
-  display: flex;
-  flex: 1;
-  padding: 2rem 0;
-  border-top: 1px solid #eaeaea;
+.characterList {
   justify-content: center;
   align-items: center;
+  padding: 1vmin;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 10px;
+}
+
+.charChildsContainer {
+  background: lightslategray;
+}
+.backHome {
+  color: whitesmoke;
+  font-size: 20px;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 10px;
+}
+
+.backHome:hover {
+  color: whitesmoke;
+}
+
+.character {
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  margin-bottom: 10px;
+  border: 1px solid grey;
+}
+
+.character:last-child {
+  margin-bottom: 0px;
+}
+
+.characterName {
+  background-color: #fff;
+  border: 2px solid #000;
+  margin: 0;
+  padding: 3px 10px;
+  font-size: 18px;
+  bottom: -2px;
+  position: absolute;
+  right: -6px;
+  transform: skew(-15deg);
+}
+
+.footer {
+  width: 100%;
+  height: 100px;
+  border-top: 1px solid #eaeaea;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer img {
+  margin-left: 0.5rem;
 }
 
 .footer a {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-grow: 1;
 }
 
 .title a {
@@ -51,7 +106,6 @@
 }
 
 .description {
-  margin: 4rem 0;
   line-height: 1.5;
   font-size: 1.5rem;
 }
@@ -71,10 +125,38 @@
   justify-content: center;
   flex-wrap: wrap;
   max-width: 800px;
+  margin-top: 3rem;
+}
+
+.searchInput {
+  display: inline-block;
+  padding: 10px;
+  height: 10px;
+  width: 300px;
+}
+
+.searchInput::placeholder {
+  color: #000;
+}
+
+.searchHeroContainer {
+  background-color: #202020;
+  padding: 8px;
+  height: 64px;
+  padding: 0 10px;
+  color: rgba(0, 0, 0, 0.85);
+  line-height: 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.logoImg {
+  cursor: pointer;
 }
 
 .card {
   margin: 1rem;
+  flex-basis: 45%;
   padding: 1.5rem;
   text-align: left;
   color: inherit;
@@ -82,7 +164,13 @@
   border: 1px solid #eaeaea;
   border-radius: 10px;
   transition: color 0.15s ease, border-color 0.15s ease;
-  max-width: 300px;
+}
+
+.cardBody {
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  padding: 1.25rem;
 }
 
 .card:hover,
@@ -92,7 +180,7 @@
   border-color: #0070f3;
 }
 
-.card h2 {
+.card h3 {
   margin: 0 0 1rem 0;
   font-size: 1.5rem;
 }
@@ -105,12 +193,39 @@
 
 .logo {
   height: 1em;
-  margin-left: 0.5rem;
 }
 
-@media (max-width: 600px) {
-  .grid {
-    width: 100%;
-    flex-direction: column;
+.masonryGrid {
+  display: flex;
+}
+
+.masonryGridColumn {
+  background-clip: padding-box;
+  padding: 5px;
+  text-align: center;
+}
+
+.conTitle {
+  font-weight: 700;
+  text-align: left;
+  color: white;
+  font-size: 30px;
+}
+.seriesTitle {
+  font-weight: 500;
+  text-align: left;
+  color: white;
+  font-size: 20px;
+}
+
+.avatarTitle {
+  font-weight: 700;
+  text-align: center;
+  font-size: 40px;
+  color: white;
+}
+@media screen and (max-width: 500px) {
+  .conTitle {
+    text-align: center;
   }
 }
