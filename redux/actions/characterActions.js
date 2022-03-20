@@ -2,17 +2,12 @@ import axios from "axios";
 import md5 from "js-md5";
 import {
   ALL_CHARACTERS_SUCCESS,
-  ALL_CHARACTERS_FAIL,
   CHARACTER_DETAILS_SUCCESS,
-  CHARACTERS_DETAILS_FAIL,
-  ADMIN_REQUEST,
-  CLEAR_CHARACTERS,
   ALL_CHARACTERS_SEARCH_REQUEST,
   COMICS_SUCCESS,
   EVENTS_SUCCESS,
   STORIES_SUCCESS,
   SERIES_SUCCESS,
-  CLEAR_ERRORS,
 } from "../constants/characterConstants";
 
 const PUBLIC_KEY = "7eb20d256eac54f658d38cd1cf958acb"; // your public key
@@ -62,10 +57,6 @@ export const getCharacters = (count) => async (dispatch) => {
     });
   } catch (error) {
     console.log(error);
-    /*   dispatch({
-              type: ALL_CHARACTERS_FAIL,
-              payload: error.response.data.message
-          }) */
   }
 };
 
@@ -82,10 +73,6 @@ export const searchCharacter = (name) => async (dispatch) => {
     });
   } catch (error) {
     console.log(error);
-    /*   dispatch({
-              type: ALL_CHARACTERS_FAIL,
-              payload: error.response.data.message
-          }) */
   }
 };
 
@@ -117,11 +104,6 @@ export const getCharacterChilds = (linkType, id) => async (dispatch) => {
     }
   } catch (error) {
     console.log(error);
-
-    /*   dispatch({
-              type: CHARACTERS_DETAILS_FAIL,
-              payload: error.response.data.message
-          }); */
   }
 };
 
@@ -136,10 +118,5 @@ export const getCharacterDetails = (req, id) => async (dispatch) => {
     });
   } catch (error) {
     console.log(error);
-
-    /*   dispatch({
-              type: CHARACTERS_DETAILS_FAIL,
-              payload: error.response.data.message
-          }); */
   }
 };

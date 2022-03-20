@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import styles from "../../styles/Home.module.css";
 
 const CharacterItem = ({ character }) => {
   const GraphCMSImageLoader = ({ src }) => {
@@ -29,9 +30,17 @@ const CharacterItem = ({ character }) => {
             href={`/character/[id]`}
             passHref
           >
-            <a style={{ textAlign: "right", textDecoration: "none" }}>
-              <span style={{ fontWeight: 700 }}>Hero Name: </span>{" "}
-              {character.name}
+            <a className={styles.heroTitle}>
+              <div className={styles.cardContent}>
+                <span
+                  style={{
+                    fontWeight: 700,
+                  }}
+                >
+                  Hero Name:{" "}
+                </span>{" "}
+                <span>{character.name}</span>
+              </div>
             </a>
           </Link>
         </h5>
@@ -40,8 +49,18 @@ const CharacterItem = ({ character }) => {
             ""
           ) : (
             <>
-              <span style={{ fontWeight: 700 }}>Description: </span>{" "}
-              {character.description}
+              <Link
+                as={`/character/${character.id}`}
+                href={`/character/[id]`}
+                passHref
+              >
+                <a className={styles.description}>
+                  <div className={styles.cardContent}>
+                    <span style={{ fontWeight: 700 }}>Description: </span>
+                    <span>{character.description}</span>
+                  </div>
+                </a>
+              </Link>
             </>
           )}
         </div>

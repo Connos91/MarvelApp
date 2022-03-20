@@ -2,8 +2,7 @@ import CharacterDetails from "../../components/Characters/CharacterDetails";
 import { getCharacterDetails } from "../../redux/actions/characterActions";
 import { getCharacterChilds } from "../../redux/actions/characterActions";
 import { wrapper } from "../../redux/store/store";
-import styles from "../../styles/Home.module.css";
-import Layout from "antd/lib/layout/layout";
+
 export default function CharacterDetailsPage() {
   return (
     <>

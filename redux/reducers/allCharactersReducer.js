@@ -1,12 +1,8 @@
 import {
   ALL_CHARACTERS_SUCCESS,
-  ALL_CHARACTERS_FAIL,
   CHARACTER_DETAILS_SUCCESS,
-  CLEAR_CHARACTERS,
   ALL_CHARACTERS_SEARCH_REQUEST,
-  ADMIN_REQUEST,
   COMICS_SUCCESS,
-  CLEAR_ERRORS,
   EVENTS_SUCCESS,
   STORIES_SUCCESS,
   SERIES_SUCCESS,
@@ -19,17 +15,6 @@ export const allCharactersReducer = (
   action
 ) => {
   switch (action.type) {
-    case ADMIN_REQUEST:
-      return {
-        ...state,
-        status: "loading",
-      };
-    case CLEAR_CHARACTERS:
-      return {
-        ...state,
-        characters: action.characters,
-      };
-
     case ALL_CHARACTERS_SUCCESS:
       return {
         ...state,
@@ -50,17 +35,6 @@ export const allCharactersReducer = (
         functionType: action.functionType,
       };
 
-    case ALL_CHARACTERS_FAIL:
-      return {
-        error: action.payload,
-      };
-
-    case CLEAR_ERRORS:
-      return {
-        ...state,
-        error: null,
-      };
-
     default:
       return state;
   }
@@ -71,12 +45,6 @@ export const cheracterDetailsReducer = (state = { character: {} }, action) => {
     case CHARACTER_DETAILS_SUCCESS:
       return {
         character: action.payload.data.results[0],
-      };
-
-    case CLEAR_ERRORS:
-      return {
-        ...state,
-        error: null,
       };
 
     default:
@@ -122,12 +90,6 @@ export const allCharacterChildsReducer = (
           ...obj,
           contentTitle: "Series",
         })),
-      };
-
-    case CLEAR_ERRORS:
-      return {
-        ...state,
-        error: null,
       };
 
     default:

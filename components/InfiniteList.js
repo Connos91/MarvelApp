@@ -12,7 +12,6 @@ const List = styled.div`
   font-size: 16px;
   margin: 0;
   padding: 6px;
-  background: #f0f2f5;
 `;
 
 const InfiniteList = (props) => {
@@ -55,10 +54,7 @@ const InfiniteList = (props) => {
         columnClassName={styles.masonryGridColumn}
       >
         {data.map((item) => (
-          <div
-            key={item.key}
-            className={styles.character}
-          >
+          <div key={item.key} className={styles.character}>
             <CharacterItem key={item.id} character={item} gap="10" />
           </div>
         ))}
