@@ -1,5 +1,6 @@
 import axios from "axios";
 import md5 from "js-md5";
+import { async } from "rxjs";
 import {
   ALL_CHARACTERS_SUCCESS,
   INITIAL_CHARACTERS_SUCCESS,
@@ -77,17 +78,12 @@ export const getCharacters = (count) => async (dispatch) => {
   }
 };
 
-export const searchCharacter = (name) => async (dispatch) => {
+export const searchCharacter = async (name) => {
   try {
     const link = linkConstruction("searchChar", null, name, null);
     const { data } = await axios.get(link);
 
-    dispatch({
-      type: ALL_CHARACTERS_SEARCH_REQUEST,
-      payload: data,
-      functionType: "search",
-      count: 0,
-    });
+    return data;
   } catch (error) {
     console.log(error);
   }

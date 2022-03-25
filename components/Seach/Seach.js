@@ -15,27 +15,36 @@ import {
   mergeMap,
 } from "rxjs";
 
+import { ALL_CHARACTERS_SEARCH_REQUEST } from "../../redux/constants/characterConstants";
+
+let searcSubject = new BehaviorSubject(""); //pre-set value
+let searchResultOnservable = searcSubject.pipe(
+  filter((val) => val.length > 1),
+  debounceTime(750), //weonly wants to execute this after user stops typing after 750 milliseconds
+  distinctUntilChanged(), // Only emit when the current value is different than the last -- we dont want to execute the same call again
+  mergeMap((val) => from(searchCharacter(val)))
+);
+
+const useObservable = (observable, dispatch) => {
+  useEffect(() => {
+    let subscription = observable.subscribe((result) => {
+      dispatch({
+        type: ALL_CHARACTERS_SEARCH_REQUEST,
+        payload: result,
+        functionType: "search",
+        count: 0,
+      });
+      console.log(result);
+    });
+    return () => subscription.unsubscribe();
+  }, [observable, dispatch]);
+};
+
 const Search = (props) => {
   const dispatch = useDispatch();
   const classes = `form-control ${styles.search}`;
 
-  const useObservable = (observable) => {
-    useEffect(() => {
-      let subscription = observable.subscribe();
-
-      return () => subscription.unsubscribe();
-    }, [observable]);
-  };
-
-  let searcSubject = new BehaviorSubject("");
-  let searchResultOnservable = searcSubject.pipe(
-    filter((val) => val.length > 1),
-    debounceTime(750), //weonly wants to execute this after user stops typing after 750 milliseconds
-    distinctUntilChanged(), // Only emit when the current value is different than the last -- we dont want to execute the same call again
-    mergeMap((val) => from(dispatch(searchCharacter(val))))
-  );
-
-  useObservable(searchResultOnservable);
+  useObservable(searchResultOnservable, dispatch);
 
   const searchHero = (e) => {
     if (e.target.value === "") {
