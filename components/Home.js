@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 import InfiniteList from "./InfiniteList";
 import styled from "styled-components";
 import Search from "./Seach/Seach";
+import LoadingOverlay from "react-loading-overlay";
+import styles from "react-loading-overlay/lib/styles";
 
 const Home = () => {
   const ListContainer = styled.div`
@@ -11,7 +13,7 @@ const Home = () => {
     overflow: auto;
   `;
 
-  const { characters, count, functionType } = useSelector(
+  const { characters, count, functionType, isActive } = useSelector(
     (state) => state.allCharacters
   );
 
@@ -19,18 +21,38 @@ const Home = () => {
 
   return (
     <>
-      <Search count={count} initialCharacters={initialCharacters} />
-      {functionType !== "initila" ? (
-        <ListContainer>
-          <InfiniteList
-            characters={characters}
-            count={count}
-            functionType={functionType}
-          />
-        </ListContainer>
-      ) : (
-        ""
-      )}
+      <LoadingOverlay
+        active={isActive}
+        spinner
+        text="Loading your content..."
+        styles={{
+          wrapper: (base) => ({
+            ...base,
+            position: "absolute",
+            display: "block",
+            height: "100vh",
+            width: "100%",
+          }),
+        }}
+      >
+        <Search
+          count={count}
+          initialCharacters={initialCharacters}
+          isActive={isActive}
+        />
+        {functionType !== "initila" ? (
+          <ListContainer>
+            <InfiniteList
+              characters={characters}
+              isActive={isActive}
+              count={count}
+              functionType={functionType}
+            />
+          </ListContainer>
+        ) : (
+          ""
+        )}
+      </LoadingOverlay>
     </>
   );
 };

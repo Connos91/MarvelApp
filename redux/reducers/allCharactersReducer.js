@@ -7,6 +7,7 @@ import {
   EVENTS_SUCCESS,
   STORIES_SUCCESS,
   SERIES_SUCCESS,
+  IS_SEARCH_ACTIVE,
   CLEAR_CHARACTERS,
 } from "../constants/characterConstants";
 import _ from "lodash";
@@ -18,6 +19,7 @@ export const allCharactersReducer = (
     initialCharacters: [],
     count: 0,
     functionType: false,
+    isActive: false,
   },
   action
 ) => {
@@ -41,12 +43,18 @@ export const allCharactersReducer = (
         count: 0,
         functionType: action.functionType,
       };
+    case IS_SEARCH_ACTIVE:
+      return {
+        ...state,
+        isActive: action.isActive,
+      };
 
     case CLEAR_CHARACTERS:
       return {
         ...state,
         characters: action.characters,
         functionType: action.functionType,
+        isActive: action.isActive,
       };
     default:
       return state;

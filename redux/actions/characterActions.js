@@ -1,6 +1,5 @@
 import axios from "axios";
 import md5 from "js-md5";
-import { async } from "rxjs";
 import {
   ALL_CHARACTERS_SUCCESS,
   INITIAL_CHARACTERS_SUCCESS,
@@ -9,6 +8,7 @@ import {
   COMICS_SUCCESS,
   EVENTS_SUCCESS,
   STORIES_SUCCESS,
+  IS_SEARCH_ACTIVE,
   SERIES_SUCCESS,
 } from "../constants/characterConstants";
 
@@ -78,12 +78,22 @@ export const getCharacters = (count) => async (dispatch) => {
   }
 };
 
-export const searchCharacter = async (name) => {
+export const searchCharacter = (name) => async (dispatch) => {
   try {
     const link = linkConstruction("searchChar", null, name, null);
     const { data } = await axios.get(link);
 
-    return data;
+    dispatch({
+      type: ALL_CHARACTERS_SEARCH_REQUEST,
+      payload: data,
+      functionType: "search",
+      count: 0,
+    });
+
+    dispatch({
+      type: IS_SEARCH_ACTIVE,
+      isActive: false,
+    });
   } catch (error) {
     console.log(error);
   }
